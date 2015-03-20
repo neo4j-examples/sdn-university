@@ -28,16 +28,6 @@ Now start your Neo4j server instance, if its not already running.
 
 **You should back up any data you want to keep because the application will purge any existing data first**
 
-Installing SDN
---------------
-If you have not already done so, you'll need to download the latest version of SDN from GitHub:
-
-    git clone https://github.com/neo4j/neo4j-ogm.git
-    cd neo4j-ogm
-    mvn clean install -DskipTests=true
-
-Once this is done, you can start the Spring-Boot application server.
-
 Starting the application
 ------------------------
 
