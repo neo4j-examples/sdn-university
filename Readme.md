@@ -34,6 +34,14 @@ Starting the application
     cd neo4j-spring-examples/sdn-boot
     mvn spring-boot:run
 
+Authentication
+--------------
+The application itself does not require any authentication, but if you are running against Neo4j 2.2 or later,
+you'll need to provide connection credentials for the database. Right now, the simplest way to do this is to pass
+the Neo4j username and password on the command line:
+
+    mvn spring-boot:run -Dusername=<usr> -Dpassword=<pwd>
+
 Loading the initial dataset
 ---------------------------
 The application can load a set of base data, to get you started. Please be aware that this will destroy
