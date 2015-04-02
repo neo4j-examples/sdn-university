@@ -40,7 +40,7 @@ The application itself does not require any authentication, but if you are runni
 you'll need to provide connection credentials for the database. Right now, the simplest way to do this is to pass
 the Neo4j username and password on the command line:
 
-    mvn spring-boot:run -Dusername=<usr> -Dpassword=<pwd>
+    mvn spring-boot:run -Drun.jvmArguments="-Dusername=<usr> -Dpassword=<pwd>"
 
 Loading the initial dataset
 ---------------------------
