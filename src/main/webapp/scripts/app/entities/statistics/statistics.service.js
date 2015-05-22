@@ -3,7 +3,7 @@
 angular.module('registrarApp')
     .factory('Statistics', function ($resource, $cacheFactory) {
 
-        var url = 'api/popularStudyBuddies';
+        var url = 'api/studyBuddies/popular';
         var cache = $cacheFactory.get('$http');
 
         return $resource(url, {}, {

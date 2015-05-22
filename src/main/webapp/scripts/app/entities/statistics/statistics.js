@@ -5,7 +5,7 @@ angular.module('registrarApp')
         $stateProvider
             .state('statistics', {
                 parent: 'entity',
-                url: '/popularStudyBuddies',
+                url: '/popular',
                 data: {
                     roles: ['ROLE_USER']
                 },

@@ -5,19 +5,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import school.domain.School;
+import school.service.ImportService;
 import school.service.SchoolService;
-import school.service.Service;
 
 @RestController
-@RequestMapping(value = "/api/schools")
-public class SchoolController extends Controller<School> {
+public class ImportController {
 
     @Autowired
     private SchoolService schoolService;
 
-    @Override
-    public Service<School> getService() {
-        return schoolService;
+    @Autowired
+    ImportService importService;
+
+    @RequestMapping("/api/reload")
+    public Iterable<School> reload() {
+
+        importService.reload();
+
+        return schoolService.findAll();
     }
 
 }
