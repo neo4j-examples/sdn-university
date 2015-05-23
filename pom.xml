@@ -11,11 +11,14 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.1.10.RELEASE</version>
+        <version>1.2.3.RELEASE</version>
     </parent>
 
+    <!-- the spring versions are tightly coupled by spring boot releases -->
     <properties>
-        <spring.version>4.1.4.RELEASE</spring.version>
+        <springdatacommons.version>1.11.0.BUILD-SNAPSHOT</springdatacommons.version>
+        <spring.version>4.1.6.RELEASE</spring.version>
+        <neo4j.version>2.1.7</neo4j.version>
     </properties>
 
     <dependencies>
@@ -28,7 +31,7 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-commons</artifactId>
-            <version>1.10.0.RC1</version>
+            <version>${springdatacommons.version}</version>
         </dependency>
 
         <dependency>
@@ -41,7 +44,7 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-neo4j</artifactId>
-            <version>4.0.0.M1</version>
+            <version>4.0.0.BUILD-SNAPSHOT</version>
         </dependency>
 
 
