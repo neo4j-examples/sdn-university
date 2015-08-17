@@ -7,9 +7,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.core.env.Environment;
@@ -28,9 +31,13 @@ import javax.annotation.PostConstruct;
 
 // todo: replace these three with @SpringBootApplication
 
-@Configuration
-@EnableAutoConfiguration
-@ComponentScan
+//
+@PropertySources({ @PropertySource(value = "classpath:application-${spring.profiles.active}.properties") })
+//
+// @Configuration
+// @EnableAutoConfiguration
+// @ComponentScan
+@SpringBootApplication
 
 @EnableNeo4jRepositories(basePackages = "school.repository", queryLookupStrategy = QueryLookupStrategy.Key.CREATE_IF_NOT_FOUND)
 @EnableTransactionManagement
