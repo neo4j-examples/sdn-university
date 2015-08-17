@@ -52,6 +52,11 @@ any existing data that may previously exist, so take a backup.
 This will pre-load the Neo4j database with a handful of departments, a dozen or so subjects and teachers,
 and 200 students. You'll probably want to enrol them in classes...
 
+Exploring Swagger UI for the API:
+-----------------
+
+    http://localhost:8080/static/index.html#/
+
 Exploring the API:
 -----------------
 The JSON resources from the server can be inspected from the /api/... URLs, e.g.
@@ -61,6 +66,7 @@ The JSON resources from the server can be inspected from the /api/... URLs, e.g.
     http://localhost:8080/api/teachers/
     http://localhost:8080/api/students/
     http://localhost:8080/api/classes/
+    
 
 Running the Hilly Fields web application
 ----------------------------------------
