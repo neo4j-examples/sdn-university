@@ -13,5 +13,7 @@ public final class Constants {
     public static final String SPRING_PROFILE_FAST = "fast";
     public static final String SPRING_PROFILE_CLOUD = "cloud";
     public static final String SYSTEM_ACCOUNT = "system";
-
+    //Table names
+    public static final String T_NAME_CONTACT = "contact";
+    public static final String T_NAME_CONTACT_ADDR = "contact_address";
 }

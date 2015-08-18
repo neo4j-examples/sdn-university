@@ -2,22 +2,44 @@ package face_bank.domain.jpa;
 
 import java.sql.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import face_bank.Constants;
+
 @Entity
-@Table(name = "contact")
+@Table(name = Constants.T_NAME_CONTACT)
 //public class Contact extends VoBase {
 public class Contact {
+//	CREATE TABLE `contact` (
+//			  `id` varchar(40) NOT NULL,
+//			  `login_name` varchar(255) DEFAULT NULL,
+//			  `display_name` varchar(255) DEFAULT NULL,
+//			  `given_name` varchar(255) DEFAULT NULL,
+//			  `family_name` varchar(255) DEFAULT NULL,
+//			  `birthday` datetime DEFAULT NULL,
+//			  `note` varchar(255) DEFAULT NULL,
+//			  `last_mdf_date` datetime DEFAULT NULL,
+//			  `user_id` bigint(20) DEFAULT NULL,
+//			  PRIMARY KEY (`id`),
+//			  KEY `ix_contact_user_1` (`user_id`),
+//			  CONSTRAINT `fk_contact_user_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+//			) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long t_id;
+	@Column(name="t_id")
+	private long id;
 
 	private int user_id;
-	private String id;
+	
+	@Column(name="id")
+	private String sid;
+	
 	private String login_name;
 	private String display_name;
 	private String given_name;
@@ -90,12 +112,21 @@ public class Contact {
 		this.last_mdf_date = last_mdf_date;
 	}
 
-	public String getId() {
+	public String getSid() {
+		return sid;
+	}
+
+	public void setSid(String sid) {
+		this.sid = sid;
+	}
+
+	public long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(long id) {
 		this.id = id;
 	}
+
 
 }

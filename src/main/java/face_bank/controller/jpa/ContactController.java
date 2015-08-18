@@ -42,33 +42,33 @@ public class ContactController {
 	private ContactRepository _contactDao;
 
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON)
-	@ApiOperation(httpMethod = "POST", value = "Response a string describing if the alarm info is successfully created or not.")
+	@ApiOperation(httpMethod = "POST", value = "Response a string describing if the contact info is successfully created or not.")
 	public JsonObject create(@RequestBody @Valid Contact contact) {
 		return new JsonObject(_contactDao.save(contact));
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	@ApiOperation(httpMethod = "GET", value = "Response a list describing all of alarm info that is successfully get or not.")
+	@ApiOperation(httpMethod = "GET", value = "Response a list describing all of contact info that is successfully get or not.")
 	public JsonObject list() {
 		return new JsonObject(this._contactDao.findAll());
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	@ApiOperation(httpMethod = "GET", value = "Response a string describing if the alarm info id is successfully get or not.")
+	@ApiOperation(httpMethod = "GET", value = "Response a string describing if the contact info id is successfully get or not.")
 	public Contact get(@PathVariable("id") long id) {
 		return this._contactDao.findOne(id);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	@ApiOperation(httpMethod = "PUT", value = "Response a string describing if the  alarm info is successfully updated or not.")
+	@ApiOperation(httpMethod = "PUT", value = "Response a string describing if the  contact info is successfully updated or not.")
 	public JsonObject update(@PathVariable("id") long id, @RequestBody @Valid Contact contact) {
 //		Contact find = this._contactDao.findOne(id);
-//		contact.setId(id);//XXX
+		contact.setId(id);
 		return new JsonObject(this._contactDao.save(contact));
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	@ApiOperation(httpMethod = "DELETE", value = "Response a string describing if the alarm info is successfully delete or not.")
+	@ApiOperation(httpMethod = "DELETE", value = "Response a string describing if the contact info is successfully delete or not.")
 	public ResponseEntity<Boolean> delete(@PathVariable("id") long id) {
 		this._contactDao.delete(id);
 		return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.OK);
