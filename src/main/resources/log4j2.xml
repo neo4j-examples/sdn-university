@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+	<Properties>
+		<Property name="PID">????</Property>
+		<Property name="LOG_PATTERN">[%d{yyyy-MM-dd HH:mm:ss.SSS}]
+			log4j2%X{context} - ${sys:PID} %5p [%t] --- %c{1}: %m%n</Property>
+	</Properties>
+	<Appenders>
+		<RollingFile name="RollingFile" fileName="logs/intellif_.log"
+			filePattern="logs/app-%d{MM-dd-yyyy}.log.gz" ignoreExceptions="false">
+			<PatternLayout>
+				<Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+			</PatternLayout>
+			<TimeBasedTriggeringPolicy />
+		</RollingFile>
+		<Console name="STDOUT" target="SYSTEM_OUT" ignoreExceptions="false">
+			<PatternLayout pattern="%d %p %c{1.} [%t] %m%n" />
+		</Console>
+	</Appenders>
+	<Loggers>
+		<Logger name="org.hibernate.validator.internal.util.Version"
+			level="warn" />
+		<Logger name="org.apache.coyote.http11.Http11NioProtocol"
+			level="warn" />
+		<Logger name="org.apache.tomcat.util.net.NioSelectorPool"
+			level="warn" />
+		<Logger name="org.apache.catalina.startup.DigesterFactory"
+			level="error" />
+
+		<Root level="info">
+			<AppenderRef ref="RollingFile" />
+			<AppenderRef ref="STDOUT" />
+		</Root>
+	</Loggers>
+</Configuration>
