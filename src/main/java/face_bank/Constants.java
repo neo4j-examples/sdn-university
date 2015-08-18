@@ -16,4 +16,5 @@ public final class Constants {
     //Table names
     public static final String T_NAME_CONTACT = "contact";
     public static final String T_NAME_CONTACT_ADDR = "contact_address";
+    public static final String T_NAME_CONTACT_EMAIL = "contact_email";
 }

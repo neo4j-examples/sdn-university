@@ -25,7 +25,7 @@ import face_bank.dto.JsonObject;
 import face_bank.repository.jpa.ContactAddressRepository;
 
 /**
- * The Class ContactAddressAddressController.
+ * The Class ContactAddressController.
  *
  * @author yangboz
  */
@@ -37,7 +37,7 @@ public class ContactAddressController {
 	// PRIVATE FIELDS
 	// ==============
 
-	// Autowire an object of type ContactAddressAddressDao
+	// Autowire an object of type ContactAddressDao
 	@Autowired
 	private ContactAddressRepository _contactAddressDao;
 
