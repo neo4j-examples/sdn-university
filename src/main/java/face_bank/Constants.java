@@ -17,4 +17,5 @@ public final class Constants {
     public static final String T_NAME_CONTACT = "contact";
     public static final String T_NAME_CONTACT_ADDR = "contact_address";
     public static final String T_NAME_CONTACT_EMAIL = "contact_email";
+    public static final String T_NAME_CONTACT_ORGANZ = "contact_organization";
 }
