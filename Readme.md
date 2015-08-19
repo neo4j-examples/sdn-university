@@ -62,6 +62,10 @@ The JSON resources from the server can be inspected from the /api/... URLs, e.g.
     http://localhost:8080/api/teachers/
     http://localhost:8080/api/students/
     http://localhost:8080/api/classes/
+    
+By SwaggerUI:
+
+    http://localhost:8080/static/index.html
 
 Running the Hilly Fields web application
 ----------------------------------------
