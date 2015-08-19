@@ -11,6 +11,7 @@ This tutorial is a fully functioning micro-service based web-application built u
 - Spring Data Neo4j
 - Angular.js
 - Twitter Bootstrap UI
+- Swagger UI
 
 The application's domain is a fictitious educational institution - Hilly Fields Technical College - and the application
 allows you to manage the College's Departments, Teaching Staff, Subjects, Students and Classes.

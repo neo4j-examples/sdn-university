@@ -57,6 +57,19 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        
+        <!-- Swagger -->
+		<dependency>
+			<groupId>com.mangofactory</groupId>
+			<artifactId>swagger-springmvc</artifactId>
+			<version>0.8.8</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ajar</groupId>
+			<artifactId>swagger-spring-mvc-ui</artifactId>
+			<version>0.1</version>
+			<scope>compile</scope>
+		</dependency>
 
     </dependencies>
 
