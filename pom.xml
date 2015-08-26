@@ -34,7 +34,7 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-neo4j</artifactId>
-            <version>4.0.0.BUILD-SNAPSHOT</version>
+            <version>4.0.0.RC2</version>
         </dependency>
 
         <dependency>
