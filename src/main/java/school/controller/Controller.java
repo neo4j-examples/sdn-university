@@ -78,7 +78,6 @@ public abstract class Controller<T> {
 
     public  T update (Long id, T entity) {
         if (getService().find(id) != null) {
-            ((Entity)entity).setId(id);
             return getService().createOrUpdate(entity);
         }
         throw new NotFoundException();
