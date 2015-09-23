@@ -1,6 +1,7 @@
 package school.service;
 
 import org.springframework.data.neo4j.repository.GraphRepository;
+
 import school.domain.Entity;
 
 public abstract class GenericService<T> implements Service<T> {
@@ -25,8 +26,16 @@ public abstract class GenericService<T> implements Service<T> {
 
     @Override
     public T createOrUpdate(T entity) {
+
+        Entity e = (Entity) entity;
+
         getRepository().save(entity, DEPTH_ENTITY);
-        return find(((Entity) entity).getId());
+
+        // NOTE: This is populated for entities but null for ones annotated with @RelationshipEntity, such as TeacherAndStudentRelationship
+        Long id = e.getId();
+
+        // return find(id); // NOTE: This blows up for entities with @RelationshipEntity, since they are not being persisted / their id is null
+        return entity;
     }
 
     public abstract GraphRepository<T> getRepository();
