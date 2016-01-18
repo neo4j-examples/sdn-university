@@ -17,6 +17,7 @@ import school.domain.*;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -29,8 +30,7 @@ public class ImportService {
 
     public void reload() {
         session.purgeDatabase();
-        session.execute(load("school.cql"));
-        //session.save(createNewSchool());
+        session.query(load("school.cql"), Collections.EMPTY_MAP);
     }
 
     protected static String load(String cqlFile) {

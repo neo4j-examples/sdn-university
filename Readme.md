@@ -2,13 +2,13 @@ Hilly Fields Technical College
 ==============================
 ![Logo](https://github.com/neo4j/neo4j-ogm/blob/master/neo4j-spring-examples/sdn-boot/src/main/webapp/assets/images/engineering-dept.JPG)
 
-This project is a demo application for the [Spring Data Neo4j](https://github.com/SpringSource/spring-data-neo4j)
+This project is a demo application for the [Spring Data Neo4j 4.1](https://github.com/SpringSource/spring-data-neo4j)
 library which provides convenient access to the [Neo4j](http://neo4j.org) graph database.
 
 This tutorial is a fully functioning micro-service based web-application built using the following components
 
 - Spring Boot
-- Spring Data Neo4j
+- Spring Data Neo4j 4.1
 - Angular.js
 - Twitter Bootstrap UI
 
@@ -40,7 +40,7 @@ The application itself does not require any authentication, but if you are runni
 you'll need to provide connection credentials for the database. Right now, the simplest way to do this is to pass
 the Neo4j username and password on the command line:
 
-    mvn spring-boot:run -Drun.jvmArguments="-Dusername=<usr> -Dpassword=<pwd>"
+    mvn spring-boot:run
 
 Loading the initial dataset
 ---------------------------

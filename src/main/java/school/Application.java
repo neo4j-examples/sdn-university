@@ -53,14 +53,6 @@ public class Application extends Neo4jConfiguration{
 
     @Override
     @Bean
-    public Neo4jServer neo4jServer() {
-        log.info("Initialising server connection");
-        return new RemoteServer("http://localhost:7474");
-        //return new InProcessServer();
-    }
-
-    @Override
-    @Bean
     public SessionFactory getSessionFactory() {
         log.info("Initialising Session Factory");
         return new SessionFactory("school.domain");
