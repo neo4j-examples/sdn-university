@@ -17,6 +17,8 @@ allows you to manage the College's Departments, Teaching Staff, Subjects, Studen
 
 It leverages the power of Spring Data Neo4j/Spring Boot and in particular the new Neo4j Object Graph mapping technology to provide a RESTful interface with which the web client interacts. The application is entirely stateless: every interaction involves a call to a Neo4j server, hopefully demonstrating the speed of the new technology, even over the wire.
 
+This version uses a Neo4j remote server. If you are interested in using Spring Data Neo4j 4.1 with embedded Neo4j, head over here https://github.com/neo4j-examples/sdn4-university/tree/4.1-embedded
+
 WARNING
 -------
 By default, the application will attempt to use a Neo4j instance running on the same machine as the application server, and on the standard port 7474. *IT WILL DESTROY ALL THE DATA IN THAT DATABASE AT STARTUP*. So if you don't want that to happen please back up any existing database first.
@@ -37,10 +39,7 @@ Starting the application
 Authentication
 --------------
 The application itself does not require any authentication, but if you are running against Neo4j 2.2 or later,
-you'll need to provide connection credentials for the database. Right now, the simplest way to do this is to pass
-the Neo4j username and password on the command line:
-
-    mvn spring-boot:run
+you'll need to provide connection credentials for the database. These can be specified in `ogm.properties` located in `src/main/resources`
 
 Loading the initial dataset
 ---------------------------
