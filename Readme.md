@@ -23,6 +23,25 @@ WARNING
 -------
 By default, the application will attempt to use a Neo4j instance running on the same machine as the application server, and on the standard port 7474. *IT WILL DESTROY ALL THE DATA IN THAT DATABASE AT STARTUP*. So if you don't want that to happen please back up any existing database first.
 
+Spring Boot Configuration
+-------------------------
+SDN4-University uses the spring-boot-starter for SDN. 
+The starter will auto-configure the application from the `application.properties` file in the `config` directory. 
+The following properties are defined: 
+
+    # Neo4j driver
+    spring.data.neo4j.driver=org.neo4j.ogm.drivers.http.driver.HttpDriver
+    
+    # connection string to the Neo4j database
+    spring.data.neo4j.URI=http://neo4j:password@localhost:7474
+    
+    # application domain packages 
+    spring.data.neo4j.domain.packages=school.domain
+    
+    # lifetime of the neo4j session for web clients (options: session, request. default=session)
+    spring.data.neo4j.session.lifetime=session
+
+
 Start Neo4j
 -----------
 
@@ -33,13 +52,23 @@ Now start your Neo4j server instance, if its not already running.
 Starting the application
 ------------------------
 
-    cd neo4j-spring-examples/sdn-boot
+    cd neo4j-spring-examples/sdn4-university
     mvn spring-boot:run
 
 Authentication
 --------------
 The application itself does not require any authentication, but if you are running against Neo4j 2.2 or later,
-you'll need to provide connection credentials for the database. These can be specified in `ogm.properties` located in `src/main/resources`
+you'll need to provide connection credentials for the database. 
+
+These can be specified in `application.properties` located in  `config`. You can embed the credentials in the URI string,
+for example: 
+
+    spring.data.neo4j.URI=http://bilbo:baggins@localhost:7474 
+
+or you can supply them as distinct properties:
+
+    spring.data.neo4j.username=bilbo
+    spring.data.neo4j.password=baggins
 
 Loading the initial dataset
 ---------------------------
