@@ -88,7 +88,7 @@ License
 -------
 Permission to use this software is granted under the MIT License, a copy of which appears below:
 
-Copyright (c) 2015,2016 Vince Bickers, Luanne Misquitta.
+Copyright © 2015-2016 Graph Aware Ltd - Neo Technology, Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation the 
