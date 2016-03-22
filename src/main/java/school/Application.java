@@ -12,14 +12,9 @@ package school;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.neo4j.Neo4jAutoConfiguration;
-import org.springframework.context.annotation.Import;
-import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
-@Import(Neo4jAutoConfiguration.class)
-@EnableNeo4jRepositories(basePackages = "school.repository")
 @EnableTransactionManagement
 public class Application {
 
