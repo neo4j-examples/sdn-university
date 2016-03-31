@@ -12,10 +12,12 @@ package school;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.neo4j.NodeEntityScan;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @EnableTransactionManagement
+@NodeEntityScan(basePackages = "school.domain")
 public class Application {
 
     public static void main(String[] args) {
