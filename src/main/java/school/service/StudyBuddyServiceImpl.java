@@ -10,13 +10,15 @@
  */
 package school.service;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.neo4j.repository.GraphRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import school.domain.StudyBuddy;
 import school.repository.StudyBuddyRepository;
-
-import java.util.Map;
 
 @Service("studyBuddyService")
 public class StudyBuddyServiceImpl extends GenericService<StudyBuddy> implements StudyBuddyService {
@@ -30,6 +32,7 @@ public class StudyBuddyServiceImpl extends GenericService<StudyBuddy> implements
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public Iterable<Map<String,Object>> getStudyBuddiesByPopularity() {
         return repository.getStudyBuddiesByPopularity();
     }

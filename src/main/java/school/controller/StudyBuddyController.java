@@ -13,9 +13,9 @@ package school.controller;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import school.domain.StudyBuddy;
 import school.service.Service;
 import school.service.StudyBuddyService;
@@ -33,6 +33,7 @@ public class StudyBuddyController extends Controller<StudyBuddy> {
     }
 
     @RequestMapping("/popular")
+    @Transactional
     public Iterable<Map<String, Object>> popularStudyBuddies() {
         return studyBuddyService.getStudyBuddiesByPopularity();
     }
