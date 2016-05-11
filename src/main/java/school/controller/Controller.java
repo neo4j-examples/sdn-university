@@ -12,15 +12,15 @@ package school.controller;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import school.controller.exception.NotFoundException;
-import school.domain.Entity;
 import school.service.Service;
 
+@Transactional
 public abstract class Controller<T> {
 
     public abstract Service<T> getService();
