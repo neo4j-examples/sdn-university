@@ -7,17 +7,16 @@ library which provides convenient access to the [Neo4j](http://neo4j.org) graph 
 
 This tutorial is a fully functioning micro-service based web-application built using the following components
 
-- Spring Boot
+- Spring Boot 1.4
 - Spring Data Neo4j 4.1
 - Angular.js
 - Twitter Bootstrap UI
 
-The application's domain is a fictitious educational institution - Hilly Fields Technical College - and the application
-allows you to manage the College's Departments, Teaching Staff, Subjects, Students and Classes.
+The application's domain is a fictitious educational institution: Hilly Fields Technical College. The application allows you to manage the College's Departments, Teaching Staff, Subjects, Students and Classes.
 
 It leverages the power of Spring Data Neo4j/Spring Boot and in particular the new Neo4j Object Graph mapping technology to provide a RESTful interface with which the web client interacts. The application is entirely stateless: every interaction involves a call to a Neo4j server, hopefully demonstrating the speed of the new technology, even over the wire.
 
-This version uses a Neo4j remote server. If you are interested in using Spring Data Neo4j 4.1 with embedded Neo4j, head over here https://github.com/neo4j-examples/sdn4-university/tree/4.1-embedded
+> This version uses a Neo4j remote server. If you are interested in using Spring Data Neo4j 4.1 with embedded Neo4j, head over here https://github.com/neo4j-examples/sdn4-university/tree/4.1-embedded
 
 WARNING
 -------
@@ -25,22 +24,34 @@ By default, the application will attempt to use a Neo4j instance running on the 
 
 Spring Boot Configuration
 -------------------------
-SDN4-University uses the spring-boot-starter for SDN. 
+SDN4-University uses the spring-boot-starter for SDN, available in Spring Boot 1.4 and later versions.
+ 
 The starter will auto-configure the application from the `application.properties` file in the `config` directory. 
 The following properties are defined: 
 
-    # Neo4j driver
-    spring.data.neo4j.driver=org.neo4j.ogm.drivers.http.driver.HttpDriver
-    
     # connection string to the Neo4j database
     spring.data.neo4j.URI=http://neo4j:password@localhost:7474
+    spring.data.neo4j.session.scope=session
     
-    # application domain packages 
-    spring.data.neo4j.domain.packages=school.domain
-    
-    # lifetime of the neo4j session for web clients (options: session, request. default=session)
-    spring.data.neo4j.session.lifetime=session
+Application Configuration
+-------------------------
 
+Application Configuration is very simple:
+
+```
+@SpringBootApplication
+@EnableTransactionManagement
+@NodeEntityScan(basePackages = "school.domain")
+public class Application {
+
+    public static void main(String[] args) {
+        new SpringApplication(Application.class).run(args);
+    }
+
+}
+```
+
+> Note the annotation `@NodeEntityScan`. This defines the packages that contain your application's domain classes. It is used by Spring Boot to configure the Neo4j OGM SessionFactory, so there is no need to explicitly manage this yourself. 
 
 Start Neo4j
 -----------
@@ -60,8 +71,7 @@ Authentication
 The application itself does not require any authentication, but if you are running against Neo4j 2.2 or later,
 you'll need to provide connection credentials for the database. 
 
-These can be specified in `application.properties` located in  `config`. You can embed the credentials in the URI string,
-for example: 
+These can be specified in `application.properties` located in  `config`. You can embed the credentials in the URI string, for example: 
 
     spring.data.neo4j.URI=http://bilbo:baggins@localhost:7474 
 
