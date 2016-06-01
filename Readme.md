@@ -16,8 +16,6 @@ The application's domain is a fictitious educational institution: Hilly Fields T
 
 It leverages the power of Spring Data Neo4j/Spring Boot and in particular the new Neo4j Object Graph mapping technology to provide a RESTful interface with which the web client interacts. The application is entirely stateless: every interaction involves a call to a Neo4j server, hopefully demonstrating the speed of the new technology, even over the wire.
 
-> This version uses a Neo4j remote server. If you are interested in using Spring Data Neo4j 4.1 with embedded Neo4j, head over here https://github.com/neo4j-examples/sdn4-university/tree/4.1-embedded
-
 WARNING
 -------
 By default, the application will attempt to use a Neo4j instance running on the same machine as the application server, and on the standard port 7474. *IT WILL DESTROY ALL THE DATA IN THAT DATABASE AT STARTUP*. So if you don't want that to happen please back up any existing database first.
@@ -27,11 +25,37 @@ Spring Boot Configuration
 SDN4-University uses the spring-boot-starter for SDN, available in Spring Boot 1.4 and later versions.
  
 The starter will auto-configure the application from the `application.properties` file in the `config` directory. 
-The following properties are defined: 
 
-    # connection string to the Neo4j database
-    spring.data.neo4j.URI=http://neo4j:password@localhost:7474
+Connecting to a remote server over Http
+---------------------------------------
+    # application.properties
+    
+    # set the connection uri for the Neo4j server
+    spring.data.neo4j.uri=http://neo4j:password@localhost:7474
+    # neo4j session scoped to the http session
     spring.data.neo4j.session.scope=session
+    
+Connecting to an embedded Neo4j instance
+---------------------------------------
+    # application.properties
+    
+    # set the connection uri to a directory on the local filesystem. This directory MUST exist
+    spring.data.neo4j.uri=file:///tmp/sdn-university
+    # neo4j session scoped to the http session
+    spring.data.neo4j.session.scope=session
+
+> Please note, you must supply a physical file location for the database in the uri property - it is not currently possible to use an in-memory instance only. 
+
+To use the Embedded Driver you must also uncomment its dependency declaration in the pom:
+
+        <!-- uncomment this dependency to use the embedded driver
+        <dependency>
+            <groupId>org.neo4j</groupId>
+            <artifactId>neo4j-ogm-embedded-driver</artifactId>
+            <version>${ogm.driver.version}</version>
+        </dependency>
+        -->
+        
     
 Application Configuration
 -------------------------

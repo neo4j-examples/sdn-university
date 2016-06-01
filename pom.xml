@@ -15,10 +15,18 @@
     </parent>
 
     <properties>
-	<neo4j.version>2.3.2</neo4j.version>
+	    <ogm.driver.version>2.1.0-SNAPSHOT</ogm.driver.version>
     </properties>
 
     <dependencies>
+
+        <!-- uncomment this dependency to use the embedded driver
+        <dependency>
+            <groupId>org.neo4j</groupId>
+            <artifactId>neo4j-ogm-embedded-driver</artifactId>
+            <version>${ogm.driver.version}</version>
+        </dependency>
+        -->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
