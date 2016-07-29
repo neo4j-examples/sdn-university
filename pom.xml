@@ -11,7 +11,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.4.0.BUILD-SNAPSHOT</version>
+        <version>1.4.0.RELEASE</version>
     </parent>
 
     <properties>
@@ -19,14 +19,6 @@
     </properties>
 
     <dependencies>
-
-        <!-- uncomment this dependency to use the embedded driver
-        <dependency>
-            <groupId>org.neo4j</groupId>
-            <artifactId>neo4j-ogm-embedded-driver</artifactId>
-            <version>${ogm.driver.version}</version>
-        </dependency>
-        -->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
