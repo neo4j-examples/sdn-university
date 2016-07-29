@@ -65,7 +65,7 @@ Application Configuration is very simple:
 ```
 @SpringBootApplication
 @EnableTransactionManagement
-@NodeEntityScan(basePackages = "school.domain")
+@EnableNeo4jRepositories(basePackages = "school.domain")
 public class Application {
 
     public static void main(String[] args) {
@@ -75,7 +75,7 @@ public class Application {
 }
 ```
 
-> Note the annotation `@NodeEntityScan`. This defines the packages that contain your application's domain classes. It is used by Spring Boot to configure the Neo4j OGM SessionFactory, so there is no need to explicitly manage this yourself. 
+> Note the annotation `@EnableNeo4jRepositories`. This defines the packages that contain your application's domain classes. It is used by Spring Boot to configure the Neo4j OGM SessionFactory, so there is no need to explicitly manage this yourself. 
 
 Start Neo4j
 -----------
