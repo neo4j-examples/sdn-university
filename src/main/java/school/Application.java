@@ -71,7 +71,7 @@ public class Application extends Neo4jConfiguration {
             @Override
             public void onApplicationEvent(AfterSaveEvent event) {
                 Object entity = event.getEntity();
-                System.out.println("Before save of: " + entity);
+                System.out.println("After save of: " + entity);
             }
         };
     }
@@ -82,7 +82,7 @@ public class Application extends Neo4jConfiguration {
             @Override
             public void onApplicationEvent(AfterDeleteEvent event) {
                 Object entity = event.getEntity();
-                System.out.println("Before save of: " + entity);
+                System.out.println("After delete of: " + entity);
             }
         };
     }
