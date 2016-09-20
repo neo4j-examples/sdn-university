@@ -10,49 +10,24 @@
  */
 package school;
 
-import org.neo4j.ogm.session.Session;
-import org.neo4j.ogm.session.SessionFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.neo4j.config.Neo4jConfiguration;
 import org.springframework.data.neo4j.event.AfterDeleteEvent;
 import org.springframework.data.neo4j.event.AfterSaveEvent;
 import org.springframework.data.neo4j.event.BeforeSaveEvent;
-import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @EnableTransactionManagement
-@EnableNeo4jRepositories(basePackages = "school.repository")
-public class Application extends Neo4jConfiguration {
+@EntityScan(basePackages = "school.domain")
+public class Application {
 
     public static void main(String[] args) {
         new SpringApplication(Application.class).run(args);
     }
-
-    /**
-     * Creates a neo4j configuration, falling back to embedded if config details not present
-     */
-    @Bean
-    public org.neo4j.ogm.config.Configuration getConfiguration() {
-        org.neo4j.ogm.config.Configuration config = new org.neo4j.ogm.config.Configuration();
-        config.driverConfiguration().setDriverClassName("org.neo4j.ogm.drivers.http.driver.HttpDriver");
-        config.driverConfiguration().setURI("http://neo4j:h4ckM3@localhost:7474");
-        return config;
-    }
-
-
-    @Bean
-    public SessionFactory getSessionFactory() {
-        return new SessionFactory(getConfiguration(), "school.domain");
-    }
-
-    public Session getSession() throws Exception {
-        return super.getSession();
-    }
-
 
     @Bean
     ApplicationListener<BeforeSaveEvent> beforeSaveEventApplicationListener() {

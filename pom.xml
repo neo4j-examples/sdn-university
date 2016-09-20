@@ -15,7 +15,7 @@
     </parent>
 
     <properties>
-	    <ogm.driver.version>2.1.0-SNAPSHOT</ogm.driver.version>
+        <ogm.driver.version>2.0.5</ogm.driver.version>
     </properties>
 
     <dependencies>
@@ -37,6 +37,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-neo4j</artifactId>
+            <version>4.1.2.RELEASE</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.voodoodyne.jackson.jsog</groupId>
             <artifactId>jackson-jsog</artifactId>
             <version>1.1</version>
@@ -46,7 +52,7 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-commons</artifactId>
-            <version>1.12.0.BUILD-SNAPSHOT</version>
+            <version>1.12.0.RELEASE</version>
         </dependency>
 
         <dependency>
@@ -60,6 +66,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot</artifactId>
+            <version>1.4.0.RELEASE</version>
         </dependency>
 
     </dependencies>

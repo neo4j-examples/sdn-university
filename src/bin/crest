@@ -1,29 +1,29 @@
 #!/bin/bash
 
-URL=$1
+URL="localhost:7474"
 
 function list {
-    curl -X GET $URL/$1/
+    curl -u "neo4j:password" -X GET "$URL/$1/"
     echo ""
 }
 
 function create {
-    curl -H "Content-Type:application/json" -X POST -d $2 $URL/$1/
+    curl -H "Content-Type:application/json" -X POST -d $2 "$URL/$1/"
     echo "create $URL"
 }
 
 function find {
-    curl -X GET $URL/$1/$2/
+    curl -X GET "$URL/$1/$2/"
     echo ""
 }
 
 function delete {
-    curl -X DELETE $URL/$1/$2/
+    curl -X DELETE "$URL/$1/$2/"
     echo ""
 }
 
 function update {
-    curl -H "Content-Type:application/json" -X PUT -d $3 $URL/$1/$2
+    curl -H "Content-Type:application/json" -X PUT -d "$3" "$URL/$1/$2"
     echo
 }
 
