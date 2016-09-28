@@ -32,19 +32,17 @@ Connecting to a remote server over Http
     
     # set the connection uri for the Neo4j server
     spring.data.neo4j.uri=http://neo4j:password@localhost:7474
-    # neo4j session scoped to the http session
+    # neo4j session scoped to the web session
     spring.data.neo4j.session.scope=session
     
 Connecting to an embedded Neo4j instance
 ---------------------------------------
     # application.properties
     
-    # set the connection uri to a directory on the local filesystem. This directory MUST exist
+    # set the connection uri to a directory on the local filesystem, or leave it blank to use an in-memory instance
     spring.data.neo4j.uri=file:///tmp/sdn-university
-    # neo4j session scoped to the http session
+    # neo4j session scoped to the web session
     spring.data.neo4j.session.scope=session
-
-> Please note, you must supply a physical file location for the database in the uri property - it is not currently possible to use an in-memory instance only. 
 
 To use the Embedded Driver you must also uncomment its dependency declaration in the pom:
 
@@ -89,6 +87,20 @@ Starting the application
 
     cd neo4j-spring-examples/sdn4-university
     mvn spring-boot:run
+
+Packaging the application
+-------------------------
+You can also run the application from a packaged war or jar file. The default packaging is `war` in the pom file, 
+change this to `jar` if you want to package the application as a jar file.
+
+To create a packaged application:
+
+    cd neo4j-spring-examples/sdn4-university
+    mvn clean package
+    
+And then to run it:
+    
+    java -jar target/sdn4-university-0.2.0.war
 
 Authentication
 --------------
