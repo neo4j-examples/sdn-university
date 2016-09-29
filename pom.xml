@@ -20,7 +20,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.7</java.version>
         <spring-data-releasetrain.version>Ingalls-BUILD-SNAPSHOT</spring-data-releasetrain.version>
-        <neo4j-ogm.version>2.1.0-SNAPSHOT</neo4j-ogm.version>
+        <neo4j-ogm.version>2.0.6-SNAPSHOT</neo4j-ogm.version>
     </properties>
 
     <dependencies>
@@ -64,7 +64,11 @@
             <artifactId>neo4j-ogm-embedded-driver</artifactId>
             <version>${neo4j-ogm.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.neo4j</groupId>
+            <artifactId>neo4j-ogm-bolt-driver</artifactId>
+            <version>${neo4j-ogm.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
