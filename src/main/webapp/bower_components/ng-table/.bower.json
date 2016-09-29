@@ -22,8 +22,7 @@
     "tag": "v0.4.3",
     "commit": "9189e987fba90b07ffc6b17c982961ad65edf725"
   },
-  "_source": "git://github.com/esvit/ng-table.git",
-  "_target": "~0.4.3",
-  "_originalSource": "ng-table",
-  "_direct": true
+  "_source": "https://github.com/esvit/ng-table.git",
+  "_target": "0.4.3",
+  "_originalSource": "ng-table"
 }
