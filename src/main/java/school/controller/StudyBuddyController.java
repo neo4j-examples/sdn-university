@@ -33,7 +33,6 @@ public class StudyBuddyController extends Controller<StudyBuddy> {
     }
 
     @RequestMapping("/popular")
-    @Transactional
     public Iterable<Map<String, Object>> popularStudyBuddies() {
         return studyBuddyService.getStudyBuddiesByPopularity();
     }

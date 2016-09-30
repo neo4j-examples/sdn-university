@@ -32,7 +32,6 @@ public class StudyBuddyServiceImpl extends GenericService<StudyBuddy> implements
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public Iterable<Map<String,Object>> getStudyBuddiesByPopularity() {
         return repository.getStudyBuddiesByPopularity();
     }

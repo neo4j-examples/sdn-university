@@ -13,6 +13,7 @@ package school.service;
 import org.neo4j.ogm.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import school.domain.*;
 
 import java.io.BufferedReader;
@@ -28,6 +29,7 @@ public class ImportService {
     @Autowired
     private Session session;
 
+    @Transactional
     public void reload() {
         session.purgeDatabase();
         session.query(load("school.cql"), Collections.EMPTY_MAP);
