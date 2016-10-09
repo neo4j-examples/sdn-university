@@ -11,6 +11,7 @@ This tutorial is a fully functioning micro-service based web-application built u
 - Spring Data Neo4j 4.1
 - Angular.js
 - Twitter Bootstrap UI
+- Swagger UI
 
 The application's domain is a fictitious educational institution: Hilly Fields Technical College. The application allows you to manage the College's Departments, Teaching Staff, Subjects, Students and Classes.
 
@@ -135,6 +136,10 @@ The JSON resources from the server can be inspected from the /api/... URLs, e.g.
     http://localhost:8080/api/teachers/
     http://localhost:8080/api/students/
     http://localhost:8080/api/classes/
+    
+By SwaggerUI:
+
+    http://localhost:8080/static/index.html
 
 Running the Hilly Fields web application
 ----------------------------------------
