@@ -9,7 +9,7 @@
     <logger name="org.neo4j.ogm" level="warn" />
     <logger name="org.springframework.data.neo4j" level="warn" />
 
-    <root level="warn">
+    <root level="info">
         <appender-ref ref="console" />
     </root>
 

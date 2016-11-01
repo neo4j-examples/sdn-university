@@ -13,10 +13,9 @@ package school;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.neo4j.Neo4jDataAutoConfiguration;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.annotation.Bean;
-import school.events.PostDeleteEvent;
+import org.springframework.context.event.EventListener;
 import school.events.PostSaveEvent;
+import school.events.PreDeleteEvent;
 import school.events.PreSaveEvent;
 
 @SpringBootApplication(exclude = Neo4jDataAutoConfiguration.class)
@@ -26,37 +25,21 @@ public class Application {
 		new SpringApplication(Application.class).run(args);
 	}
 
-    @Bean
-    ApplicationListener<PreSaveEvent> beforeSaveEventApplicationListener() {
-        return new ApplicationListener<PreSaveEvent>() {
-            @Override
-            public void onApplicationEvent(PreSaveEvent event) {
-                Object entity = event.getSource();
-                System.out.println("Before save of: " + entity);
-            }
-        };
-    }
+	@EventListener
+	public void onPreSaveEvent(PreSaveEvent event) {
+		Object entity = event.getSource();
+		System.out.println("Before save of: " + entity);
+	}
 
-    @Bean
-    ApplicationListener<PostSaveEvent> afterSaveEventApplicationListener() {
-        return new ApplicationListener<PostSaveEvent>() {
-            @Override
-            public void onApplicationEvent(PostSaveEvent event) {
-                Object entity = event.getSource();
-                System.out.println("Before save of: " + entity);
-            }
-        };
-    }
+	@EventListener
+	public void onPostSaveEvent(PostSaveEvent event) {
+		Object entity = event.getSource();
+		System.out.println("After save of: " + entity);
+	}
 
-    @Bean
-    ApplicationListener<PostDeleteEvent> deleteEventApplicationListener() {
-        return new ApplicationListener<PostDeleteEvent>() {
-            @Override
-            public void onApplicationEvent(PostDeleteEvent event) {
-                Object entity = event.getSource();
-                System.out.println("Before save of: " + entity);
-            }
-        };
-    }
-
+	@EventListener
+	public void onPreDeleteEvent(PreDeleteEvent event) {
+		Object entity = event.getSource();
+		System.out.println("After delete of: " + entity);
+	}
 }
