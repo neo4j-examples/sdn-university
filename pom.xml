@@ -6,21 +6,23 @@
 
     <groupId>sdn-boot</groupId>
     <artifactId>sdn4-university</artifactId>
-    <version>0.3.0</version>
-    <packaging>war</packaging>
+    <version>0.4.0</version>
+    <packaging>jar</packaging>
+
+    <name>SDN4 University</name>
+    <description>Demo project for Spring Boot running with Spring Data Neo4j</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.4.1.RELEASE</version>
+        <version>1.5.0.BUILD-SNAPSHOT</version>
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.7</java.version>
-        <spring-data-releasetrain.version>Ingalls-BUILD-SNAPSHOT</spring-data-releasetrain.version>
-        <neo4j-ogm.version>2.1.0-SNAPSHOT</neo4j-ogm.version>
+        <java.version>1.8</java.version>
     </properties>
 
     <dependencies>
@@ -53,12 +55,6 @@
             <scope>compile</scope>
         </dependency>
 
-        <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
-            <version>2.3</version>
-        </dependency>
-
         <!-- uncomment to use embedded -->
         <!--
         <dependency>
@@ -81,13 +77,6 @@
     <build>
         <plugins>
             <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
@@ -97,20 +86,21 @@
     <repositories>
 
         <repository>
-            <id>spring-libs-snapshot</id>
-            <name>Spring</name>
-            <url>http://repo.spring.io/libs-snapshot</url>
-        </repository>
-
-        <repository>
             <id>spring-snapshots</id>
-            <url>http://repo.spring.io/snapshot</url>
-            <snapshots><enabled>true</enabled></snapshots>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
         </repository>
 
         <repository>
             <id>spring-milestones</id>
-            <url>http://repo.spring.io/milestone</url>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </repository>
 
         <repository>

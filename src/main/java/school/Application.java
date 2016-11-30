@@ -12,18 +12,31 @@ package school;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.data.neo4j.Neo4jDataAutoConfiguration;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.event.EventListener;
+import school.events.EventPublisher;
 import school.events.PostSaveEvent;
 import school.events.PreDeleteEvent;
 import school.events.PreSaveEvent;
 
-@SpringBootApplication(exclude = Neo4jDataAutoConfiguration.class)
+/**
+ * NOTE: Currently this application does not wire up the event publisher (see 4.2.x branch).
+ * Will have to talk to the Spring Boot guy on how to do that.
+ */
+@SpringBootApplication
+@EntityScan("school.domain")
 public class Application {
 
 	public static void main(String[] args) {
-		new SpringApplication(Application.class).run(args);
+		SpringApplication.run(Application.class, args);
 	}
+
+	@Bean
+	public EventPublisher eventPublisher() {
+		return new EventPublisher();
+	}
+
 
 	@EventListener
 	public void onPreSaveEvent(PreSaveEvent event) {
