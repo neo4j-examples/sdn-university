@@ -23,7 +23,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <neo4j-ogm.version>2.1.0-SNAPSHOT</neo4j-ogm.version><!-- Remove this once SDN RC1 is out.-->
     </properties>
 
     <dependencies>
@@ -49,6 +48,13 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- dependency to use Neo4j Bolt Driver -->
+        <dependency>
+            <groupId>org.neo4j</groupId>
+            <artifactId>neo4j-ogm-bolt-driver</artifactId>
+            <version>${neo4j-ogm.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>com.voodoodyne.jackson.jsog</groupId>
             <artifactId>jackson-jsog</artifactId>
@@ -65,14 +71,15 @@
         </dependency>
         -->
 
-        <!-- uncomment to use bolt -->
+        <!-- uncomment to use http -->
         <!--
         <dependency>
             <groupId>org.neo4j</groupId>
-            <artifactId>neo4j-ogm-bolt-driver</artifactId>
+            <artifactId>neo4j-ogm-http-driver</artifactId>
             <version>${neo4j-ogm.version}</version>
         </dependency>
         -->
+
     </dependencies>
 
     <build>
@@ -89,7 +96,7 @@
         <repository>
             <id>spring-snapshots</id>
             <name>Spring Snapshots</name>
-            <url>https://repo.spring.io/snapshot</url>
+            <url>https://repo.spring.io/libs-snapshot</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
@@ -98,7 +105,7 @@
         <repository>
             <id>spring-milestones</id>
             <name>Spring Milestones</name>
-            <url>https://repo.spring.io/milestone</url>
+            <url>https://repo.spring.io/libs-milestone</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>

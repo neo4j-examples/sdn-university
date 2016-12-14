@@ -10,11 +10,9 @@
  */
 package school;
 
-import org.neo4j.ogm.session.SessionFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.event.EventListener;
 import school.events.EventPublisher;
@@ -22,19 +20,19 @@ import school.events.PostSaveEvent;
 import school.events.PreDeleteEvent;
 import school.events.PreSaveEvent;
 
-/**
- * NOTE: Currently this application does not wire up the event publisher (see 4.2.x branch).
- * Will have to talk to the Spring Boot guy on how to do that.
- */
+
 @SpringBootApplication
 @EntityScan("school.domain")
 public class Application {
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
-        context.getBean(SessionFactory.class).register(context.getBean(EventPublisher.class));
+        SpringApplication.run(Application.class, args);
     }
 
+    /**
+     * Simply defining a Neo4j OGM <code>EventListener</code> will register it
+     * with the session factory.
+     */
     @Bean
     public EventPublisher eventPublisher() {
         return new EventPublisher();
