@@ -10,6 +10,8 @@
  */
 package school.aop;
 
+import java.util.Arrays;
+
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -20,14 +22,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import school.Constants;
+import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
+import school.Constants;
 
 /**
  * Aspect for logging execution of service and repository Spring components.
  */
 @Aspect
+@Component
 public class LoggingAspect {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
