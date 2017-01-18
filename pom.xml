@@ -4,13 +4,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>sdn-boot</groupId>
+    <groupId>com.neo4j.examples</groupId>
     <artifactId>sdn4-university</artifactId>
     <version>0.4.0</version>
     <packaging>jar</packaging>
 
     <name>SDN4 University</name>
-    <description>Demo project for Spring Boot running with Spring Data Neo4j</description>
+    <description>Demo web project for Spring Boot using Spring Data Neo4j</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -23,7 +23,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <neo4j-ogm.version>2.1.1-SNAPSHOT</neo4j-ogm.version>
+        <neo4j-ogm.version>2.1.1</neo4j-ogm.version>
     </properties>
 
     <dependencies>
@@ -49,13 +49,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- dependency to use Neo4j Bolt Driver -->
-        <dependency>
-            <groupId>org.neo4j</groupId>
-            <artifactId>neo4j-ogm-bolt-driver</artifactId>
-            <version>${neo4j-ogm.version}</version>
-        </dependency>
-
         <dependency>
             <groupId>com.voodoodyne.jackson.jsog</groupId>
             <artifactId>jackson-jsog</artifactId>
@@ -64,21 +57,33 @@
         </dependency>
 
         <!-- uncomment to use embedded -->
-        <!--<dependency>-->
-            <!--<groupId>org.neo4j</groupId>-->
-            <!--<artifactId>neo4j-ogm-embedded-driver</artifactId>-->
-            <!--<version>${neo4j-ogm.version}</version>-->
-            <!--<scope>compile</scope>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>org.neo4j</groupId>
+            <artifactId>neo4j-ogm-embedded-driver</artifactId>
+            <version>${neo4j-ogm.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.neo4j</groupId>
+            <artifactId>neo4j</artifactId>
+            <version>3.1.0</version>
+            <scope>runtime</scope>
+        </dependency>
 
         <!-- uncomment to use http -->
-        <!--&lt;!&ndash;-->
         <!--<dependency>-->
             <!--<groupId>org.neo4j</groupId>-->
             <!--<artifactId>neo4j-ogm-http-driver</artifactId>-->
             <!--<version>${neo4j-ogm.version}</version>-->
         <!--</dependency>-->
-        <!--&ndash;&gt;-->
+
+        <!-- uncomment to use bolt -->
+        <!--<dependency>-->
+        <!--<groupId>org.neo4j</groupId>-->
+        <!--<artifactId>neo4j-ogm-bolt-driver</artifactId>-->
+        <!--<version>${neo4j-ogm.version}</version>-->
+        <!--</dependency>-->
 
     </dependencies>
 
@@ -92,36 +97,41 @@
     </build>
 
     <repositories>
-
         <repository>
             <id>spring-snapshots</id>
             <name>Spring Snapshots</name>
-            <url>https://repo.spring.io/libs-snapshot</url>
+            <url>https://repo.spring.io/snapshot</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
         </repository>
-
         <repository>
             <id>spring-milestones</id>
             <name>Spring Milestones</name>
-            <url>https://repo.spring.io/libs-milestone</url>
+            <url>https://repo.spring.io/milestone</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
         </repository>
-
-        <repository>
-            <id>neo4j</id>
-            <url>http://m2.neo4j.org/content/repositories/releases</url>
-        </repository>
-
-        <repository>
-            <id>neo4j-snapshots</id>
-            <url>http://m2.neo4j.org/content/repositories/snapshots</url>
-        </repository>
-
     </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
 
 </project>
 

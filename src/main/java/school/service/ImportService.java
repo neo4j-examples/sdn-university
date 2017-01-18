@@ -12,6 +12,7 @@ package school.service;
 
 import org.neo4j.ogm.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import school.domain.*;
@@ -23,11 +24,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-@Service
+@Component
 public class ImportService {
 
-    @Autowired
     private Session session;
+
+    @Autowired
+    public ImportService(Session session) {
+        this.session = session;
+    }
 
     @Transactional
     public void reload() {
