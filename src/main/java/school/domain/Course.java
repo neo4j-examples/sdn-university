@@ -13,6 +13,8 @@ package school.domain;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
@@ -21,6 +23,7 @@ import org.neo4j.ogm.annotation.Relationship;
  * The course object connects a teacher
  * with a subject and the pupils who are taught the subject by the teacher
  */
+@JsonIdentityInfo(generator=JSOGGenerator.class)
 @NodeEntity(label = "Class")
 public class Course {
 

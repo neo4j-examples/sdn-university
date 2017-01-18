@@ -19,7 +19,7 @@ import school.domain.Course;
 import school.repository.CourseRepository;
 
 @RestController
-@RequestMapping(value = "/api/classes", consumes = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/classes")
 public class CourseController {
 
 	private CourseRepository courseRepository;

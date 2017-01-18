@@ -18,7 +18,7 @@ import school.domain.Subject;
 import school.repository.SubjectRepository;
 
 @RestController
-@RequestMapping(value = "/api/subjects", consumes = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/subjects")
 public class SubjectController {
 
 	private SubjectRepository subjectRepository;

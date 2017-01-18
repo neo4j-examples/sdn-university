@@ -21,7 +21,7 @@ import school.repository.StudyBuddyRepository;
 
 
 @RestController
-@RequestMapping(value = "/api/studyBuddies", consumes = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/studyBuddies")
 public class StudyBuddyController {
 
 	private StudyBuddyRepository studyBuddyRepository;
