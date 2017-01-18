@@ -11,23 +11,48 @@
 package school.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.http.MediaType;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
 import school.domain.Teacher;
-import school.service.Service;
-import school.service.TeacherService;
+import school.repository.TeacherRepository;
 
 @RestController
-@RequestMapping(value = "/api/teachers")
-public class TeacherController extends Controller<Teacher> {
+@RequestMapping(value = "/api/teachers", consumes = MediaType.APPLICATION_JSON_VALUE)
+public class TeacherController {
 
-    @Autowired
-    private TeacherService teacherService;
+	private TeacherRepository teacherRepository;
 
-    @Override
-    public Service<Teacher> getService() {
-        return teacherService;
-    }
+	@Autowired
+	public TeacherController(TeacherRepository teacherRepository) {
+		this.teacherRepository = teacherRepository;
+	}
 
+	@RequestMapping(method = RequestMethod.GET)
+	public Iterable<Teacher> readAll() {
+		return teacherRepository.findAll();
+	}
+
+	@RequestMapping(method = RequestMethod.POST)
+	public Teacher create(@RequestBody Teacher teacher) {
+		return teacherRepository.save(teacher);
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public Teacher read(@PathVariable Long id) {
+		return teacherRepository.findOne(id);
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public void delete(@PathVariable Long id) {
+		teacherRepository.delete(id);
+	}
+
+	@Transactional
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public Teacher update(@PathVariable Long id, @RequestBody Teacher update) {
+		final Teacher existing = teacherRepository.findOne(id);
+		existing.updateFrom(update);
+		return teacherRepository.save(existing);
+	}
 }

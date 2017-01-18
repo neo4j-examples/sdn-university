@@ -13,58 +13,63 @@ package school.domain;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
 
 @NodeEntity
-public class Student extends Entity {
+public class Student {
 
-    private String name;
+	@GraphId
+	private Long id;
 
-    @Relationship(type = "ENROLLED")
-    private Set<Course> courses;
+	private String name;
 
-    @Relationship(type="BUDDY", direction=Relationship.INCOMING)
-    private Set<StudyBuddy> studyBuddies;
+	@Relationship(type = "ENROLLED")
+	private Set<Course> courses;
 
-    public Student() {
-        this.studyBuddies = new HashSet<>();
-        this.courses = new HashSet<>();
-    }
+	@Relationship(type = "BUDDY", direction = Relationship.INCOMING)
+	private Set<StudyBuddy> studyBuddies;
 
-    public Student(String name) {
-        this();
-        this.name = name;
-    }
+	public Student() {
+		this.studyBuddies = new HashSet<>();
+		this.courses = new HashSet<>();
+	}
 
-    public String getName() {
-        return name;
-    }
+	public Student(String name) {
+		this();
+		this.name = name;
+	}
 
-    public Set<StudyBuddy> getStudyBuddies() {
-        return studyBuddies;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public Set<Course> getCourses() {
-        return courses;
-    }
+	public Set<StudyBuddy> getStudyBuddies() {
+		return studyBuddies;
+	}
 
-    public void setCourses( Set<Course> courses ) {
-        this.courses = courses;
-    }
+	public Set<Course> getCourses() {
+		return courses;
+	}
 
-    @Override
-    public String toString() {
-        return "Student{" +
-                "id=" + getId() +
-                ", name='" + name + '\'' +
-                ", courses=" + courses.size() +
-                ", studyBuddies=" + studyBuddies.size() +
-                '}';
-    }
+
+	@Override
+	public String toString() {
+		return "Student{" +
+				"id=" + getId() +
+				", name='" + name + '\'' +
+				", courses=" + courses.size() +
+				", studyBuddies=" + studyBuddies.size() +
+				'}';
+	}
+
+	public void updateFrom(Student student) {
+		this.name = student.name;
+	}
 }

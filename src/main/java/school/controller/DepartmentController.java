@@ -11,23 +11,48 @@
 package school.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.http.MediaType;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
 import school.domain.Department;
-import school.service.DepartmentService;
-import school.service.Service;
+import school.repository.DepartmentRepository;
 
 @RestController
-@RequestMapping(value = "/api/departments")
-public class DepartmentController extends Controller<Department> {
+@RequestMapping(value = "/api/departments", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+public class DepartmentController {
 
-    @Autowired
-    private DepartmentService departmentService;
+	private DepartmentRepository departmentRepository;
 
-    @Override
-    public Service<Department> getService() {
-        return departmentService;
-    }
+	@Autowired
+	public DepartmentController(DepartmentRepository departmentRepository) {
+		this.departmentRepository = departmentRepository;
+	}
 
+	@RequestMapping(method = RequestMethod.GET)
+	public Iterable<Department> readAll() {
+		return departmentRepository.findAll();
+	}
+
+	@RequestMapping(method = RequestMethod.POST)
+	public Department create(@RequestBody Department department) {
+		return departmentRepository.save(department);
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public Department read(@PathVariable Long id) {
+		return departmentRepository.findOne(id);
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public void delete(@PathVariable Long id) {
+		departmentRepository.delete(id);
+	}
+
+	@Transactional
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public Department update(@PathVariable Long id, @RequestBody Department update) {
+		final Department existing = departmentRepository.findOne(id);
+		existing.updateFrom(update);
+		return departmentRepository.save(existing);
+	}
 }

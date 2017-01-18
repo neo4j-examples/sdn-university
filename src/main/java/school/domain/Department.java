@@ -13,11 +13,15 @@ package school.domain;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
 @NodeEntity
-public class Department extends Entity {
+public class Department {
+
+    @GraphId
+    private Long id;
 
     private String name;
 
@@ -37,28 +41,20 @@ public class Department extends Entity {
         this.name = name;
     }
 
-    public String getName() {
-        return name;
+    public Long getId() {
+        return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getName() {
+        return name;
     }
 
     public Set<Teacher> getTeachers() {
         return teachers;
     }
 
-    public void setTeachers(Set<Teacher> teachers) {
-        this.teachers = teachers;
-    }
-
     public Set<Subject> getSubjects() {
         return subjects;
-    }
-
-    public void setSubjects(Set<Subject> subjects) {
-        this.subjects = subjects;
     }
 
     @Override
@@ -69,5 +65,9 @@ public class Department extends Entity {
                 ", teachers=" + teachers.size() +
                 ", subjects=" + subjects.size() +
                 '}';
+    }
+
+    public void updateFrom(Department department) {
+        this.name = department.name;
     }
 }
