@@ -40,8 +40,6 @@ git clone git@github.com:neo4j-examples/sdn4-university.git
 cd sdn4-university
 ```
 
-The static resources defined in the `bower.json` file are installed under the `src/main/webapp/bower_components` directory. Normally this directory should be ignored by `git` but is included here to make the application ready to run.
-
 ### Starting the application
 
 No configuration is required as this application will run with a temporary embedded Neo4j Database by default. See below on how to set this up with a standalone Neo4j Server using bolt or the http drivers.
@@ -55,7 +53,7 @@ mvn spring-boot:run
 And that's it! Head to <http://localhost:8080> to see your application running.
 
 > **NOTE**
-> If you restart your application you may notice your changes disappear. That's because if you don't supply a directory to house the database only a temporary data store is set up
+> If you restart your application you may notice changes made in your database disappear. That's because if you don't supply a directory to house the database only a temporary data store is set up
 > (and gets destroyed on close). If you want the data to persist between restarts then in your favourite
 > editor modify `src/main/resources/application.properties` and add a new line with `spring.data.neo4j.uri=file:///var/tmp/neo4j.db` or wherever you want your database to reside.
 
@@ -132,14 +130,15 @@ You can then run the front end angular application simply by using:
 grunt serve
 ```
 
-If you start the Spring Boot application at this point you should be able to hit the backend from this front end; handy for development purposes.
 
 
 If you would like to prepare a releasable version of your front end assets you can run:
 
 ```
-grunt build
+grunt clean build
 ```
+
+Your assets will then be available in the `src/main/resources/static` directory.
 
 You can then run the maven boot run command to see your application served up entirely from Spring Boot!
 
