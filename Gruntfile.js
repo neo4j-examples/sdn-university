@@ -16,7 +16,7 @@ module.exports = function (grunt) {
   // Configurable paths for the application
     var appConfig = {
         app: require('./bower.json').appPath || 'src/main/web',
-        dist: 'target/generated-sources/static'
+        dist: 'src/main/resources/static'
     };
 
     grunt.initConfig({
