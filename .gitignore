@@ -1,5 +1,6 @@
 target/
 node_modules/
+src/main/web/bower_components
 deploy/
 .buildpath
 .project
