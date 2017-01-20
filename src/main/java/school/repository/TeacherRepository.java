@@ -10,11 +10,9 @@
  */
 package school.repository;
 
+import org.springframework.data.repository.CrudRepository;
 import school.domain.Teacher;
-import org.springframework.data.neo4j.repository.GraphRepository;
-import org.springframework.stereotype.Repository;
 
-@Repository
-public interface TeacherRepository extends GraphRepository<Teacher> {
+public interface TeacherRepository extends CrudRepository<Teacher, Long> {
 
 }

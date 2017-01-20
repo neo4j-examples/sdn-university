@@ -10,75 +10,48 @@
  */
 package school.domain;
 
-import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Relationship;
-
 import java.util.ArrayList;
 import java.util.List;
 
-@NodeEntity(label = "StudyBuddy")
-public class StudyBuddy extends Entity {
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
+import org.neo4j.ogm.annotation.GraphId;
+import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
 
-    @Relationship(type="BUDDY")
-    private List<Student> buddies;
-    private Course course;
- //   private String description;
+@JsonIdentityInfo(generator=JSOGGenerator.class)
+@NodeEntity
+public class StudyBuddy {
 
-    public StudyBuddy(){
-        buddies = new ArrayList<>();
-    }
+	@GraphId
+	private Long id;
 
-    public void setCourse( Course course )
-    {
-        this.course = course;
-    }
+	@Relationship(type = "BUDDY")
+	private List<Student> buddies;
 
-    public void setBuddyTwo( Student buddyTwo )
-    {
-        buddies.add(buddyTwo);
-    }
+	private Course course;
 
-    public void setBuddyOne( Student buddyOne )
-    {
-        buddies.add(buddyOne);
-    }
+	public StudyBuddy() {
+		buddies = new ArrayList<>();
+	}
 
-    public Course getCourse()
-    {
-        return course;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public Student getBuddyTwo()
-    {
-        if (buddies.size() > 1) {
-            return buddies.get(1);
-        } else {
-            return null;
-        }
-    }
+	public Course getCourse() {
+		return course;
+	}
 
-    public Student getBuddyOne()
-    {
-        if (buddies.size() > 0) {
-            return buddies.get(0);
-        } else {
-            return null;
-        }
-    }
+	@Override
+	public String toString() {
+		return "StudyBuddy{" +
+				"buddies= " + buddies.size() +
+				", course=" + course +
+				'}';
+	}
 
-    @Override
-    public String toString() {
-        return "StudyBuddy{" +
-                "buddies= " + buddies.size() +
-                ", course=" + course +
-                '}';
-    }
-
-//    public String getDescription() {
-//        return course.getName() + ", " + getBuddyOne().getName() + ", " + getBuddyTwo().getName();
-//    }
-//
-//    public void setDescription(String description) {
-//        // here as a convenience for JsonMapper
-//    }
+	public void updateFrom(StudyBuddy studyBuddy) {
+		this.course = studyBuddy.course;
+	}
 }

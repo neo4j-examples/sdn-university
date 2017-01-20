@@ -10,16 +10,14 @@
  */
 package school.repository;
 
-import org.springframework.data.neo4j.annotation.Query;
-import org.springframework.data.neo4j.repository.GraphRepository;
-import org.springframework.stereotype.Repository;
-import school.domain.StudyBuddy;
-
 import java.util.Map;
 
-@Repository
-public interface StudyBuddyRepository extends GraphRepository<StudyBuddy> {
+import org.springframework.data.neo4j.annotation.Query;
+import org.springframework.data.repository.CrudRepository;
+import school.domain.StudyBuddy;
 
-    @Query("MATCH(s:StudyBuddy)<-[:BUDDY]-(p:Student) return p, count(s) as buddies ORDER BY buddies DESC")
-    Iterable<Map<String, Object>> getStudyBuddiesByPopularity();
+public interface StudyBuddyRepository extends CrudRepository<StudyBuddy, Long> {
+
+	@Query("MATCH(s:StudyBuddy)<-[:BUDDY]-(p:Student) return p, count(s) as buddies ORDER BY buddies DESC")
+	Iterable<Map<String, Object>> getStudyBuddiesByPopularity();
 }

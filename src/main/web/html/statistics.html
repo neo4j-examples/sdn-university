@@ -1,0 +1,31 @@
+<div class="page-header">
+    <h1>Popular Study Buddies</h1>
+
+</div>
+
+<div class="form-inline">
+    <div class="form-group">
+        <input type="text" class="form-control" ng-model="searchText" placeholder="Search for...">
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12 ">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Student</th>
+                <th># Study Buddies</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr style="cursor: pointer;" ui-sref="classDetail({id:class.id})"
+                ng-repeat="result in results | filter:searchText">
+                <td>{{result.p.name}}</td>
+                <td>{{result.buddies}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+

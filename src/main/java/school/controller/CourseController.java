@@ -12,23 +12,48 @@
 package school.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.http.MediaType;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
 import school.domain.Course;
-import school.service.ClassRegisterService;
-import school.service.Service;
+import school.repository.CourseRepository;
 
 @RestController
 @RequestMapping(value = "/api/classes")
-public class CourseController extends Controller<Course> {
+public class CourseController {
 
-    @Autowired
-    private ClassRegisterService classRegisterService;
+	private CourseRepository courseRepository;
 
-    @Override
-    public Service<Course> getService() {
-        return classRegisterService;
-    }
+	@Autowired
+	public CourseController(CourseRepository courseRepository) {
+		this.courseRepository = courseRepository;
+	}
 
+	@RequestMapping(method = RequestMethod.GET)
+	public Iterable<Course> readAll() {
+		return courseRepository.findAll();
+	}
+
+	@RequestMapping(method = RequestMethod.POST)
+	public Course create(@RequestBody Course course) {
+		return courseRepository.save(course);
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public Course read(@PathVariable Long id) {
+		return courseRepository.findOne(id);
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public void delete(@PathVariable Long id) {
+		courseRepository.delete(id);
+	}
+
+	@Transactional
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public Course update(@PathVariable Long id, @RequestBody Course update) {
+		final Course existing = courseRepository.findOne(id);
+		existing.updateFrom(update);
+		return courseRepository.save(existing);
+	}
 }

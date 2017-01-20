@@ -13,52 +13,47 @@ package school;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.neo4j.event.AfterDeleteEvent;
-import org.springframework.data.neo4j.event.AfterSaveEvent;
-import org.springframework.data.neo4j.event.BeforeSaveEvent;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.context.event.EventListener;
+import school.events.EventPublisher;
+import school.events.PostSaveEvent;
+import school.events.PreDeleteEvent;
+import school.events.PreSaveEvent;
+
 
 @SpringBootApplication
-@EnableTransactionManagement
-@EntityScan(basePackages = "school.domain")
+@EntityScan("school.domain")
 public class Application {
 
     public static void main(String[] args) {
-        new SpringApplication(Application.class).run(args);
+        SpringApplication.run(Application.class, args);
     }
 
+    /**
+     * Simply defining a Neo4j OGM <code>EventListener</code> will register it
+     * with the session factory.
+     */
     @Bean
-    ApplicationListener<BeforeSaveEvent> beforeSaveEventApplicationListener() {
-        return new ApplicationListener<BeforeSaveEvent>() {
-            @Override
-            public void onApplicationEvent(BeforeSaveEvent event) {
-                Object entity = event.getEntity();
-                System.out.println("Before save of: " + entity);
-            }
-        };
+    public EventPublisher eventPublisher() {
+        return new EventPublisher();
     }
 
-    @Bean
-    ApplicationListener<AfterSaveEvent> afterSaveEventApplicationListener() {
-        return new ApplicationListener<AfterSaveEvent>() {
-            @Override
-            public void onApplicationEvent(AfterSaveEvent event) {
-                Object entity = event.getEntity();
-                System.out.println("Before save of: " + entity);
-            }
-        };
+
+    @EventListener
+    public void onPreSaveEvent(PreSaveEvent event) {
+        Object entity = event.getSource();
+        System.out.println("Before save of: " + entity);
     }
 
-    @Bean
-    ApplicationListener<AfterDeleteEvent> deleteEventApplicationListener() {
-        return new ApplicationListener<AfterDeleteEvent>() {
-            @Override
-            public void onApplicationEvent(AfterDeleteEvent event) {
-                Object entity = event.getEntity();
-                System.out.println("Before save of: " + entity);
-            }
-        };
+    @EventListener
+    public void onPostSaveEvent(PostSaveEvent event) {
+        Object entity = event.getSource();
+        System.out.println("After save of: " + entity);
+    }
+
+    @EventListener
+    public void onPreDeleteEvent(PreDeleteEvent event) {
+        Object entity = event.getSource();
+        System.out.println("After delete of: " + entity);
     }
 }

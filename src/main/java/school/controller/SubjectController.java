@@ -11,23 +11,48 @@
 package school.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.http.MediaType;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
 import school.domain.Subject;
-import school.service.Service;
-import school.service.SubjectService;
+import school.repository.SubjectRepository;
 
 @RestController
 @RequestMapping(value = "/api/subjects")
-public class SubjectController extends Controller<Subject> {
+public class SubjectController {
 
-    @Autowired
-    private SubjectService subjectService;
+	private SubjectRepository subjectRepository;
 
-    @Override
-    public Service<Subject> getService() {
-        return subjectService;
-    }
+	@Autowired
+	public SubjectController(SubjectRepository subjectRepository) {
+		this.subjectRepository = subjectRepository;
+	}
 
+	@RequestMapping(method = RequestMethod.GET)
+	public Iterable<Subject> readAll() {
+		return subjectRepository.findAll();
+	}
+
+	@RequestMapping(method = RequestMethod.POST)
+	public Subject create(@RequestBody Subject subject) {
+		return subjectRepository.save(subject);
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public Subject read(@PathVariable Long id) {
+		return subjectRepository.findOne(id);
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public void delete(@PathVariable Long id) {
+		subjectRepository.delete(id);
+	}
+
+	@Transactional
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public Subject update(@PathVariable Long id, @RequestBody Subject update) {
+		final Subject existing = subjectRepository.findOne(id);
+		existing.updateFrom(update);
+		return subjectRepository.save(existing);
+	}
 }

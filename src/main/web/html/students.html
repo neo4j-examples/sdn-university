@@ -1,0 +1,65 @@
+<div class="page-header">
+    <h1>Students </h1>
+
+</div>
+
+<div class="form-inline">
+    <div class="form-group">
+        <input type="text" class="form-control" ng-model="searchText" placeholder="Search for...">
+    </div>
+    <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#saveStudentModal" ng-click="clear()">
+        <span class="glyphicon glyphicon-plus"></span> <span>Create</span>
+    </button>
+</div>
+
+<div class="row">
+    <div class="col-sm-12 ">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr style="cursor: pointer;" ui-sref="studentDetail({id:student.id})" ng-repeat="student in students | filter:searchText track by student.id">
+                <td>{{student.id}}</td>
+                <td>{{student.name}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="saveStudentModal" tabindex="-1" role="dialog" aria-labelledby="myStudentLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form name="form" role="form" novalidate
+                  class="ng-scope ng-invalid ng-invalid-required ng-dirty ng-valid-minlength"
+                  ng-submit="create()">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                            ng-click="clear()">&times;</button>
+                    <h4 class="modal-title" id="myStudentLabel">Create or edit a Student</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" class="form-control"
+                               ng-model="student.name">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+                        <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+                    </button>
+                    <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

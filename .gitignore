@@ -1,7 +1,6 @@
 target/
-bower_components/
 node_modules/
-notworkingyet/
+src/main/web/bower_components
 deploy/
 .buildpath
 .project

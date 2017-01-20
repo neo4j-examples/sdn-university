@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>Student Registration and Curriculum Management</title>
+
+    <!-- build:css(src/main/web) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+</head>
+
+<body ng-app="registrarApp">
+
+<div ui-view="navbar"></div>
+
+<!-- Begin page content -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4 hidden-xs">
+            <img src="images/student-register.jpg" class="img-responsive">
+        </div>
+        <div class="col-sm-8 col-xs-12">
+            <div ui-view="content"></div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted">&copy; 2016 Neo Technology, Inc; Graph Aware Ltd.</p>
+    </div>
+</footer>
+
+    <!-- build:js(src/main/web) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/json3/lib/json3.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/checklist-model/checklist-model.js"></script>
+    <script src="bower_components/jsog/lib/JSOG.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+        <!-- build:js({.tmp,src/main/web}) scripts/scripts.js -->
+<script src="scripts/app.js"></script>
+<script src="scripts/navbar.directive.js"></script>
+<script src="scripts/error/error.js"></script>
+<script src="scripts/main/main.js"></script>
+<script src="scripts/main/main.controller.js"></script>
+<script src="scripts/entities/entity.js"></script>
+<script src="scripts/entities/school/school.js"></script>
+<script src="scripts/entities/school/school.controller.js"></script>
+<script src="scripts/entities/school/school-detail.controller.js"></script>
+<script src="scripts/entities/school/school.service.js"></script>
+<script src="scripts/entities/department/department.js"></script>
+<script src="scripts/entities/department/department.controller.js"></script>
+<script src="scripts/entities/department/department-detail.controller.js"></script>
+<script src="scripts/entities/department/department.service.js"></script>
+<script src="scripts/entities/student/student.js"></script>
+<script src="scripts/entities/student/student.controller.js"></script>
+<script src="scripts/entities/student/student-detail.controller.js"></script>
+<script src="scripts/entities/student/student.service.js"></script>
+<script src="scripts/entities/subject/subject.js"></script>
+<script src="scripts/entities/subject/subject.controller.js"></script>
+<script src="scripts/entities/subject/subject-detail.controller.js"></script>
+<script src="scripts/entities/subject/subject.service.js"></script>
+<script src="scripts/entities/teacher/teacher.js"></script>
+<script src="scripts/entities/teacher/teacher.controller.js"></script>
+<script src="scripts/entities/teacher/teacher-detail.controller.js"></script>
+<script src="scripts/entities/teacher/teacher.service.js"></script>
+<script src="scripts/entities/class/class.js"></script>
+<script src="scripts/entities/class/class.controller.js"></script>
+<script src="scripts/entities/class/class-detail.controller.js"></script>
+<script src="scripts/entities/class/class.service.js"></script>
+<script src="scripts/entities/studyBuddy/studyBuddy.js"></script>
+<script src="scripts/entities/studyBuddy/studyBuddy.controller.js"></script>
+<script src="scripts/entities/studyBuddy/studyBuddy-detail.controller.js"></script>
+<script src="scripts/entities/studyBuddy/studyBuddy.service.js"></script>
+<script src="scripts/entities/statistics/statistics.js"></script>
+<script src="scripts/entities/statistics/statistics.controller.js"></script>
+<script src="scripts/entities/statistics/statistics.service.js"></script>
+        <!-- endbuild -->
+
+
+</body>
+</html>

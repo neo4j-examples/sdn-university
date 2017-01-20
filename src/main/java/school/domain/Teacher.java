@@ -13,73 +13,72 @@ package school.domain;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
+import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
+@JsonIdentityInfo(generator=JSOGGenerator.class)
 @NodeEntity
-public class Teacher extends Entity {
+public class Teacher {
 
-    private String name;
+	@GraphId
+	private Long id;
 
-    @Relationship(type="TEACHES_CLASS")
-    private Set<Course> courses;
+	private String name;
 
-    @Relationship(type="DEPARTMENT_MEMBER", direction = Relationship.INCOMING)
-    private Department department;
+	@Relationship(type = "TEACHES_CLASS")
+	private Set<Course> courses;
 
-    @Relationship(type="TAUGHT_BY", direction = Relationship.INCOMING)
-    private Set<Subject> subjects;
+	@Relationship(type = "DEPARTMENT_MEMBER", direction = Relationship.INCOMING)
+	private Department department;
 
-    public Teacher(String name) {
-        this();
-        this.name = name;
-    }
+	@Relationship(type = "TAUGHT_BY", direction = Relationship.INCOMING)
+	private Set<Subject> subjects;
 
-    public Teacher() {
-        this.courses = new HashSet<>();
-        this.subjects = new HashSet<>();
-    }
+	public Teacher(String name) {
+		this();
+		this.name = name;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public Teacher() {
+		this.courses = new HashSet<>();
+		this.subjects = new HashSet<>();
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public Set<Course> getCourses() {
-        return courses;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setCourses( Set<Course> courses ) {
-        this.courses = courses;
-    }
+	public Set<Course> getCourses() {
+		return courses;
+	}
 
-    public Department getDepartment() {
-        return department;
-    }
+	public Department getDepartment() {
+		return department;
+	}
 
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
+	public Set<Subject> getSubjects() {
+		return subjects;
+	}
 
-    public Set<Subject> getSubjects() {
-        return subjects;
-    }
+	@Override
+	public String toString() {
+		return "Teacher{" +
+				"id=" + getId() +
+				", name='" + name + '\'' +
+				", classRegisters=" + courses.size() +
+				", department=" + department +
+				", subjects=" + subjects.size() +
+				'}';
+	}
 
-    public void setSubjects(Set<Subject> subjects) {
-        this.subjects = subjects;
-    }
-
-    @Override
-    public String toString() {
-        return "Teacher{" +
-                "id=" + getId() +
-                ", name='" + name + '\'' +
-                ", classRegisters=" + courses.size() +
-                ", department=" + department +
-                ", subjects=" + subjects.size() +
-                '}';
-    }
+	public void updateFrom(Teacher teacher) {
+		this.name = teacher.name;
+	}
 }
