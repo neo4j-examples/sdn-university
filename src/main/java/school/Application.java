@@ -54,6 +54,6 @@ public class Application {
     @EventListener
     public void onPreDeleteEvent(PreDeleteEvent event) {
         Object entity = event.getSource();
-        System.out.println("After delete of: " + entity);
+        System.out.println("Before delete of: " + entity);
     }
 }
