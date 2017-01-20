@@ -3,16 +3,20 @@
 
 
 module.exports = function (grunt) {
+
+  // Time how long tasks take. Can help when optimizing build times
     require('time-grunt')(grunt);
 
+  // Automatically load required Grunt tasks
     require('jit-grunt')(grunt, {
         useminPrepare: 'grunt-usemin',
         ngtemplates: 'grunt-angular-templates',
     });
 
+  // Configurable paths for the application
     var appConfig = {
-        app: require('./bower.json').appPath || 'src/main/webapp',
-        dist: 'target/webapp'
+        app: require('./bower.json').appPath || 'src/main/web',
+        dist: 'target/generated-sources/static'
     };
 
     grunt.initConfig({
@@ -21,11 +25,6 @@ module.exports = function (grunt) {
 
         // Watches files for changes and runs tasks based on the changed files
         watch: {
-            options: {
-                livereload: {
-                    port: '<%= connect.options.livereload %>',
-                }
-            },
             bower: {
                 files: ['bower.json'],
                 tasks: ['wiredep']
@@ -45,6 +44,9 @@ module.exports = function (grunt) {
                 files: ['Gruntfile.js']
             },
             livereload: {
+                options: {
+                    livereload: '<%= connect.options.livereload %>'
+                },
                 files: [
                     '<%= yeoman.app %>/**/*.html',
                     '.tmp/styles/{,*/}*.css',
@@ -57,6 +59,7 @@ module.exports = function (grunt) {
         connect: {
             options: {
                 port: 9000,
+                hostname: '0.0.0.0',
                 open: true,
                 livereload: 35729
             },
@@ -65,22 +68,9 @@ module.exports = function (grunt) {
                     open: true,
                     middleware: function (connect) {
                         return [
-                            connect().use(function (req, res, next) {
-                                res.setHeader('Access-Control-Allow-Origin', 'http://0.0.0.0:8080');
-                                res.setHeader('Access-Control-Allow-Methods', 'GET,POST,DELETE,PUT,PATCH,OPTIONS,HEAD');
-                                res.setHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, Authorization, Content-Length, X-Requested-With');
-
-                                // intercept OPTIONS method
-                                if ('OPTIONS' === req.method) {
-                                    res.send(204);
-                                }
-                                else {
-                                    next();
-                                }
-                            }),
-                            require('connect-modrewrite')(['!(\\..+)$ / [L]']),
                             connect.static('.tmp'),
-                            connect().use('/bower_components', connect.static('src/main/webapp/bower_components')),
+                            connect().use('/bower_components', connect.static('./src/main/web/bower_components')),
+                            connect().use('/src/main/web/styles', connect.static('./src/main/web/styles')),
                             connect.static(appConfig.app)
                         ]
                     }
@@ -120,9 +110,6 @@ module.exports = function (grunt) {
                     'Gruntfile.js',
                     '<%= yeoman.app %>/scripts/**/*.js'
                 ]
-            },
-            test: {
-                src: ['test/spec/**/*.js']
             }
         },
 
@@ -214,50 +201,13 @@ module.exports = function (grunt) {
             css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
             js: ['<%= yeoman.dist %>/scripts/**/*.js'],
             options: {
-                assetsDirs: ['<%= yeoman.dist %>', '<%= yeoman.dist %>/images',  '<%= yeoman.dist %>/styles'],
+                assetsDirs: [
+                    '<%= yeoman.dist %>',
+                    '<%= yeoman.dist %>/images',
+                    '<%= yeoman.dist %>/styles'
+                ],
                 patterns: {
-                    html: [
-                        [/(images\/.*?\.(?:gif|jpeg|jpg|png|webp|svg))/gm,
-                            'Update the angular directives that ref revved images'],
-
-                        //defaults from node module
-                        [/<script.+src=['"]([^"']+)["']/gm,
-                            'Update the HTML to reference our concat/min/revved script files'
-                        ],
-                        [/<link[^\>]+href=['"]([^"']+)["']/gm,
-                            'Update the HTML with the new css filenames'
-                        ],
-                        [/<img[^\>]+src=['"]([^"']+)["']/gm,
-                            'Update the HTML with the new img filenames'
-                        ],
-                        [/data-main\s*=['"]([^"']+)['"]/gm,
-                            'Update the HTML with data-main tags',
-                            function (m) {
-                                return m.match(/\.js$/) ? m : m + '.js';
-                            },
-                            function (m) {
-                                return m.replace('.js', '');
-                            }
-                        ],
-                        [/data-(?!main).[^=]+=['"]([^'"]+)['"]/gm,
-                            'Update the HTML with data-* tags'
-                        ],
-                        [/url\(\s*['"]([^"']+)["']\s*\)/gm,
-                            'Update the HTML with background imgs, case there is some inline style'
-                        ],
-                        [/<a[^\>]+href=['"]([^"']+)["']/gm,
-                            'Update the HTML with anchors images'
-                        ],
-                        [/<input[^\>]+src=['"]([^"']+)["']/gm,
-                            'Update the HTML with reference in input'
-                        ]
-                    ],
                     js: [[/(images\/[^''""]*\.(png|jpg|jpeg|gif|webp|svg))/g, 'Replacing references to images']]
-                    //
-                    //js: [
-                    //    [/(images\/.*?\.(?:gif|jpeg|jpg|png|webp|svg))/gm,
-                    //        'Update the JS to reference our revved images']
-                    //]
                 }
             }
         },
@@ -274,14 +224,6 @@ module.exports = function (grunt) {
         },
 
         svgmin: {
-            options: {
-                plugins: [
-                    { cleanupIDs: false },
-                    { removeViewBox: false },
-                    { removeUselessStrokeAndFill: false },
-                    { removeEmptyAttrs: false }
-                ]
-            },
             dist: {
                 files: [{
                     expand: true,
@@ -317,10 +259,23 @@ module.exports = function (grunt) {
                     usemin: 'scripts/scripts.js'
                 },
                 cwd: '<%= yeoman.app %>',
-                src: 'scripts/**/*.html',
+                src: 'html/**/*.html',
                 dest: '.tmp/templateCache.js'
             }
         },
+
+    // ng-annotate tries to make the code safe for minification automatically
+    // by using the Angular long form for dependency injection.
+    ngAnnotate: {
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '.tmp/concat/scripts',
+          src: '*.js',
+          dest: '.tmp/concat/scripts'
+        }]
+      }
+    },
 
         // Copies remaining files to places other tasks can use
         copy: {
@@ -341,6 +296,11 @@ module.exports = function (grunt) {
                     cwd: '.tmp/images',
                     dest: '<%= yeoman.dist %>/images',
                     src: ['generated/*']
+                }, {
+                    expand: true,
+                    cwd: 'src/main/web/bower_components/bootstrap/dist',
+                    src: 'fonts/*',
+                    dest: '<%= yeoman.dist %>'
                 }]
             },
             styles: {
@@ -354,25 +314,14 @@ module.exports = function (grunt) {
         // Run some tasks in parallel to speed up the build process
         concurrent: {
             server: [
+                'copy:styles'
             ],
             dist: [
+                'copy:styles',
                 'imagemin',
                 'svgmin'
             ]
         },
-
-        // ng-annotate tries to make the code safe for minification automatically
-        // by using the Angular long form for dependency injection.
-        ngAnnotate: {
-            dist: {
-                files: [{
-                    expand: true,
-                    cwd: '.tmp/concat/scripts',
-                    src: '*.js',
-                    dest: '.tmp/concat/scripts'
-                }]
-            }
-        }
     });
 
     grunt.registerTask('serve', function (target) {

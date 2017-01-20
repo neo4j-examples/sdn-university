@@ -1,18 +1,26 @@
 {
-  "name": "registrarApp",
-  "version": "0.0.0",
+  "name": "sdn4university",
+  "appPath": "src/main/web",
+  "moduleName": "registrarApp",
+  "version": "0.0.1",
   "dependencies": {
     "bootstrap": "3.3.7",
     "jquery": "2.1.1",
-    "angular": "1.3.4",
+    "angular": "1.6.1",
     "json3": "3.3.2",
-    "angular-ui-router": "0.2.13",
-    "angular-resource": "1.3.4",
-    "angular-sanitize": "1.3.4",
-    "checklist-model": "~0.1.3",
-    "jsog": "~1.0.6"
+    "angular-ui-router": "0.4.1",
+    "angular-resource": "1.6.1",
+    "angular-sanitize": "1.6.1",
+    "checklist-model": "0.10.0",
+    "jsog": "1.0.7"
   },
-  "resolutions": {
-    "angular": "1.3.4"
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "less/bootstrap.less",
+        "dist/css/bootstrap.css",
+        "dist/js/bootstrap.js"
+      ]
+    }
   }
 }
