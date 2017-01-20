@@ -1,4 +1,4 @@
-// Generated on 2015-01-22 using generator-jhipster 2.0.0
+// author - Mark Angrish
 'use strict';
 
 
