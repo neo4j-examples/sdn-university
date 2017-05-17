@@ -96,7 +96,7 @@ If you'd like to run this application using the original REST HTTP driver agains
 
 You may notice that there is no data for you to interact with. To fix this hit the following endpoint from your browser or using `curl`:
 
-<http://localhost:5050/api/reload>
+<http://localhost:8080/api/reload>
 
 This will pre-load the Neo4j database with a handful of departments, a dozen or so subjects and teachers,
 and 200 students. You'll probably want to enrol them in classes...
