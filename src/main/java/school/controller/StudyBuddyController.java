@@ -10,14 +10,18 @@
  */
 package school.controller;
 
-import java.util.Map;
-
+import org.neo4j.ogm.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import school.domain.StudyBuddy;
 import school.repository.StudyBuddyRepository;
+
+import java.util.Map;
 
 
 @RestController
@@ -43,18 +47,18 @@ public class StudyBuddyController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public StudyBuddy read(@PathVariable Long id) {
-		return studyBuddyRepository.findOne(id);
+		return studyBuddyRepository.findById(id).orElseThrow(NotFoundException::new);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public void delete(@PathVariable Long id) {
-		studyBuddyRepository.delete(id);
+		studyBuddyRepository.deleteById(id);
 	}
 
 	@Transactional
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public StudyBuddy update(@PathVariable Long id, @RequestBody StudyBuddy update) {
-		final StudyBuddy existing = studyBuddyRepository.findOne(id);
+		final StudyBuddy existing = studyBuddyRepository.findById(id).orElseThrow(NotFoundException::new);
 		existing.updateFrom(update);
 		return studyBuddyRepository.save(existing);
 	}

@@ -10,67 +10,65 @@
  */
 package school.domain;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
-import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
-@JsonIdentityInfo(generator=JSOGGenerator.class)
+import java.util.HashSet;
+import java.util.Set;
+
+@JsonIdentityInfo(generator = JSOGGenerator.class)
 @NodeEntity
 public class Department {
 
-    @GraphId
-    private Long id;
+	private Long id;
 
-    private String name;
+	private String name;
 
-    @Relationship(type = "DEPARTMENT_MEMBER")
-    private Set<Teacher> teachers;
+	@Relationship(type = "DEPARTMENT_MEMBER")
+	private Set<Teacher> teachers;
 
-    @Relationship(type = "CURRICULUM")
-    private Set<Subject> subjects;
+	@Relationship(type = "CURRICULUM")
+	private Set<Subject> subjects;
 
-    public Department() {
-        this.teachers = new HashSet<>();
-        this.subjects = new HashSet<>();
-    }
+	public Department() {
+		this.teachers = new HashSet<>();
+		this.subjects = new HashSet<>();
+	}
 
-    public Department(String name) {
-        this();
-        this.name = name;
-    }
+	public Department(String name) {
+		this();
+		this.name = name;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public Set<Teacher> getTeachers() {
-        return teachers;
-    }
+	public Set<Teacher> getTeachers() {
+		return teachers;
+	}
 
-    public Set<Subject> getSubjects() {
-        return subjects;
-    }
+	public Set<Subject> getSubjects() {
+		return subjects;
+	}
 
-    @Override
-    public String toString() {
-        return "Department{" +
-                "id=" + getId() +
-                ", name='" + name + '\'' +
-                ", teachers=" + teachers.size() +
-                ", subjects=" + subjects.size() +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "Department{" +
+				"id=" + getId() +
+				", name='" + name + '\'' +
+				", teachers=" + teachers.size() +
+				", subjects=" + subjects.size() +
+				'}';
+	}
 
-    public void updateFrom(Department department) {
-        this.name = department.name;
-    }
+	public void updateFrom(Department department) {
+		this.name = department.name;
+	}
 }

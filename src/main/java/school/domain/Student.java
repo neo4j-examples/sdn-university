@@ -10,20 +10,18 @@
  */
 package school.domain;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
-import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
-@JsonIdentityInfo(generator=JSOGGenerator.class)
+import java.util.HashSet;
+import java.util.Set;
+
+@JsonIdentityInfo(generator = JSOGGenerator.class)
 @NodeEntity
 public class Student {
 
-	@GraphId
 	private Long id;
 
 	private String name;

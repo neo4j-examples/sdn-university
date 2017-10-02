@@ -10,10 +10,14 @@
  */
 package school.controller;
 
+import org.neo4j.ogm.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import school.domain.Subject;
 import school.repository.SubjectRepository;
 
@@ -40,18 +44,18 @@ public class SubjectController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public Subject read(@PathVariable Long id) {
-		return subjectRepository.findOne(id);
+		return subjectRepository.findById(id).orElseThrow(NotFoundException::new);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public void delete(@PathVariable Long id) {
-		subjectRepository.delete(id);
+		subjectRepository.deleteById(id);
 	}
 
 	@Transactional
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public Subject update(@PathVariable Long id, @RequestBody Subject update) {
-		final Subject existing = subjectRepository.findOne(id);
+		final Subject existing = subjectRepository.findById(id).orElseThrow(NotFoundException::new);
 		existing.updateFrom(update);
 		return subjectRepository.save(existing);
 	}

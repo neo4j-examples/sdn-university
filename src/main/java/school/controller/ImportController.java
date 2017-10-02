@@ -21,22 +21,22 @@ import school.service.ImportService;
 @RestController
 public class ImportController {
 
-    private ImportService service;
+	private ImportService service;
 
-    @Autowired
-    public ImportController(ImportService service) {
-        this.service = service;
-    }
+	@Autowired
+	public ImportController(ImportService service) {
+		this.service = service;
+	}
 
 
-    @Transactional
-    @RequestMapping("/api/reload")
-    public ResponseEntity reload() {
+	@Transactional
+	@RequestMapping("/api/reload")
+	public ResponseEntity reload() {
 
-        service.clearDatabase();
-        service.load();
+		service.clearDatabase();
+		service.load();
 
-        return new ResponseEntity<Void>(HttpStatus.CREATED);
-    }
+		return new ResponseEntity<Void>(HttpStatus.CREATED);
+	}
 
 }
