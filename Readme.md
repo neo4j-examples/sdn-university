@@ -10,9 +10,9 @@ Hilly Fields Technical College is a fictitious educational institution. This app
 
 This project is built using:
 
-- Spring Boot 1.5
-- Spring Data Neo4j 4.2
-- Neo4j OGM 2.1
+- Spring Boot 2.0.0 BUILD-SNAPSHOT
+- Spring Data Neo4j 5
+- Neo4j OGM 3.0.0
 - AngularJS 1.6
 - Bootstrap 3.3
 
@@ -33,11 +33,11 @@ You will need to following to run this application:
 
 ### Download the application
 
-Either [download](https://github.com/neo4j-examples/sdn4-university/archive/master.zip) the application or use `git` to clone the application:
+Either [download](https://github.com/neo4j-examples/sdn-university/archive/master.zip) the application or use `git` to clone the application:
 
 ```
-git clone git@github.com:neo4j-examples/sdn4-university.git
-cd sdn4-university
+git clone git@github.com:neo4j-examples/sdn-university.git
+cd sdn-university
 ```
 
 ### Starting the application
@@ -53,9 +53,9 @@ mvn spring-boot:run
 And that's it! Head to <http://localhost:8080> to see your application running.
 
 > **NOTE**
-> If you restart your application you may notice changes made in your database disappear. That's because if you don't supply a directory to house the database only a temporary data store is set up
-> (and gets destroyed on close). If you want the data to persist between restarts then in your favourite
-> editor modify `src/main/resources/application.properties` and add a new line with `spring.data.neo4j.uri=file:///var/tmp/neo4j.db` or wherever you want your database to reside.
+> If you restart your application you may notice changes made in your database disappear.
+> That's because if you don't supply a directory to house the database only a temporary data store is set up (and gets destroyed on close).
+> If you want the data to persist between restarts then in your favourite editor modify `src/main/resources/application.properties` and add a new line with `spring.data.neo4j.uri=file:///var/tmp/neo4j.db` or wherever you want your database to reside.
 
 #### Using the binary Bolt driver
 
@@ -91,8 +91,9 @@ If you'd like to run this application using the original REST HTTP driver agains
 
 > **WARNING**
 >
-> By default, the application will use an Neo4j embedded instance of Neo4j. If you are running this application with the bolt or http drivers
-> be careful as **IT WILL DESTROY ALL THE DATA IN THAT DATABASE ** after hitting the URL below.  So if you don't want that to happen please back up any existing database first.
+> By default, the application will use an Neo4j embedded instance of Neo4j.
+> If you are running this application with the bolt or http drivers be careful as **IT WILL DESTROY ALL THE DATA IN THAT DATABASE** after hitting the URL below.
+> So if you don't want that to happen please back up any existing database first.
 
 You may notice that there is no data for you to interact with. To fix this hit the following endpoint from your browser or using `curl`:
 
@@ -119,8 +120,8 @@ If you'd like to contribute to the development of this application you will need
 Once you have followed their instruction on installation you will need to install the project's node and bower dependencies via:
 
 ```
-git clone git@github.com:neo4j-examples/sdn4-university.git
-cd sdn4-university
+git clone git@github.com:neo4j-examples/sdn-university.git
+cd sdn-university
 npm install  && bower install
 ```
 
