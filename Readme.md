@@ -10,7 +10,7 @@ Hilly Fields Technical College is a fictitious educational institution. This app
 
 This project is built using:
 
-- Spring Boot 2.0.0 BUILD-SNAPSHOT
+- Spring Boot 2.0.0 M7
 - Spring Data Neo4j 5
 - Neo4j OGM 3.0.0
 - AngularJS 1.6
