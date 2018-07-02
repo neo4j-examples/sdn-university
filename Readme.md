@@ -12,7 +12,7 @@ This project is built using:
 
 - Spring Boot 2.0.3
 - Spring Data Neo4j 5
-- Neo4j OGM 3.0.0
+- Neo4j OGM 3.1.0
 - AngularJS 1.6
 - Bootstrap 3.3
 

@@ -10,7 +10,7 @@
  */
 package school.controller;
 
-import org.neo4j.ogm.exception.NotFoundException;
+import org.neo4j.ogm.exception.core.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
