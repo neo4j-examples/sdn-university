@@ -61,9 +61,9 @@ And that's it! Head to <http://localhost:8080> to see your application running.
 
 If you'd like to run this application using the fast bolt driver against a standalone Neo4j instance then you will need to do the following.
 
-1. Mark sure you have a [Neo4j](http://neo4j.org) instance installed and running.
+1. Make sure you have a [Neo4j](http://neo4j.org) instance installed and running.
 1. Change the `pom.xml` to comment out the embedded driver and the embedded neo4j instance dependencies and instead uncomment the bolt driver.
-1. You'll need to provide connection credentials for the database to the bolt driver. To do this is to set the Neo4j username and password in `src/main/resources/application.properties`
+1. You'll need to provide connection credentials for the database to the bolt driver. To do this, set the Neo4j username and password in `src/main/resources/application.properties`
     ```
     spring.data.neo4j.uri=bolt://localhost
     spring.data.neo4j.username=<your username>
@@ -76,9 +76,9 @@ If you'd like to run this application using the fast bolt driver against a stand
 
 If you'd like to run this application using the original REST HTTP driver against a standalone Neo4j instance then you will need to do the following.
 
-1. Mark sure you have a [Neo4j](http://neo4j.org) instance installed and running.
+1. Make sure you have a [Neo4j](http://neo4j.org) instance installed and running.
 1. Change the `pom.xml` to comment out the embedded driver and the embedded neo4j instance dependencies and instead uncomment the http driver.
-1. You'll need to provide connection credentials for the database to the bolt driver. To do this is to set the Neo4j username and password in `src/main/resources/application.properties`
+1. You'll need to provide connection credentials for the database to the bolt driver. To do this, set the Neo4j username and password in `src/main/resources/application.properties`
     ```
     spring.data.neo4j.uri=http://localhost:7474
     spring.data.neo4j.username=<your username>
@@ -95,12 +95,12 @@ If you'd like to run this application using the original REST HTTP driver agains
 > If you are running this application with the bolt or http drivers be careful as **IT WILL DESTROY ALL THE DATA IN THAT DATABASE** after hitting the URL below.
 > So if you don't want that to happen please back up any existing database first.
 
-You may notice that there is no data for you to interact with. To fix this hit the following endpoint from your browser or using `curl`:
+You may notice that there is no data for you to interact with. To fix this, hit the following endpoint from your browser or using `curl`:
 
 <http://localhost:8080/api/reload>
 
 This will pre-load the Neo4j database with a handful of departments, a dozen or so subjects and teachers,
-and 200 students. You'll probably want to enrol them in classes...
+and 200 students. You'll probably want to enroll them in classes...
 
 
 ### Stopping the application server
@@ -125,7 +125,7 @@ cd sdn-university
 npm install  && bower install
 ```
 
-You can then run the front end angular application simply by using:
+You can then run the front-end angular application simply by using:
 
 ```
 grunt serve
